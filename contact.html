@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - My Website</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Dark Mode Toggle Button - Body ke end se pehle -->
+<button class="theme-toggle" onclick="toggleTheme()" data-tooltip="Switch Theme">
+    🌓
+</button>
+
+<!-- Loading Animation -->
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+</div>
+
+<script>
+    // Dark Mode Toggle
+    function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+    }
+    
+    // Hide loader
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('loader');
+        loader.classList.add('hide');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    });
+    
+    // Scroll Reveal
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+    
+    function handleScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach(el => {
+            if (isElementInViewport(el)) {
+                el.classList.add('active');
+            }
+        });
+    }
+    
+    // Add reveal class to cards
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.add('reveal');
+    });
+    
+    window.addEventListener('scroll', handleScrollReveal);
+    window.addEventListener('load', handleScrollReveal);
+</script>
+</head>
+<body>
+
+<header>
+    <h1>Contact Me</h1>
+    <p>I'd love to hear from you</p>
+</header>
+
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">👤 About</a>
+    <a href="contact.html" class="active">📞 Contact</a>
+</nav>
+
+<main class="container">
+    <div class="card">
+        <h2>📬 Get In Touch</h2>
+        <p>Have a question or want to work together? Feel free to reach out!</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-label">📧 Email:</span>
+                <span class="contact-value">hello@mywebsite.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">📱 Phone:</span>
+                <span class="contact-value">+91 98765 43210</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">📍 Location:</span>
+                <span class="contact-value">Mumbai, India</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>✉️ Send Me a Message</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" placeholder="Write your message here..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 My Website | Learning Web Development</p>
+</footer>
+
+</body>
+</html>

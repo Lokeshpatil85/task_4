@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - My Website</title>
+    <link rel="stylesheet" href="style.css">  
+    <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Dark Mode Toggle Button - Body ke end se pehle -->
+<button class="theme-toggle" onclick="toggleTheme()" data-tooltip="Switch Theme">
+    🌓
+</button>
+
+<!-- Loading Animation -->
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+</div>
+
+<script>
+    // Dark Mode Toggle
+    function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+    }
+    
+    // Hide loader
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('loader');
+        loader.classList.add('hide');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    });
+    
+    // Scroll Reveal
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+    
+    function handleScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach(el => {
+            if (isElementInViewport(el)) {
+                el.classList.add('active');
+            }
+        });
+    }
+    
+    // Add reveal class to cards
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.add('reveal');
+    });
+    
+    window.addEventListener('scroll', handleScrollReveal);
+    window.addEventListener('load', handleScrollReveal);
+</script>
+</head>
+<body>
+
+<header>
+    <h1>About Me</h1>
+    <p>Get to know me better</p>
+</header>
+
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html" class="active">👤 About</a>
+    <a href="contact.html">📞 Contact</a>
+</nav>
+
+<main class="container">
+    <div class="card">
+        <h2>👋 Who Am I?</h2>
+        <p>I'm a passionate web developer who loves creating beautiful and functional websites. I started learning web development recently and I'm excited about the journey ahead!</p>
+        <p>I believe in continuous learning and improving my skills every day. This website is part of my learning process where I apply what I learn.</p>
+    </div>
+
+    <div class="card">
+        <h2>💡 My Skills</h2>
+        <div class="skills">
+            <span class="skill-badge">HTML5</span>
+            <span class="skill-badge">CSS3</span>
+            <span class="skill-badge">JavaScript (Learning)</span>
+            <span class="skill-badge">Responsive Design</span>
+            <span class="skill-badge">Problem Solving</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 My Mission</h2>
+        <p>To build websites that not only look great but also provide value to users. I want to help businesses and individuals establish their online presence.</p>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 My Website | Learning Web Development</p>
+</footer>
+
+</body>
+</html>
